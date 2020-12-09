@@ -1,5 +1,9 @@
 # This is a demo for an Electron issue.
 
+## Issue
+
+See https://github.com/electron/electron/issues/26903 for the full issue description.
+
 ## To reproduce:
 
 1. Put CPU under pressure for this to be more easily reproducable, e.g. with \
