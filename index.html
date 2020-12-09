@@ -7,16 +7,17 @@
     <button>Button just to check renderer responsiveness</button>
     <script>
       "use strict";
-      console.error('instantiateAsync')
+      console.log('fetch/compile started')
       const wasmBinaryFile = new URL('d3wasm.wasm', document.location.href).toString()
       fetch(wasmBinaryFile, { credentials: "same-origin" }).then(
         (response) => {
           console.log('fetch finished')
-          WebAssembly.instantiateStreaming(response, {}).then(() => {
-            console.log('instantiateStreaming finished, this is fine')
+          // Can be also reproduced with instantiateStreaming
+          WebAssembly.compileStreaming(response, {}).then(() => {
+            console.log('compileStreaming finished, this is fine')
             window.close()
           }).catch(() => {
-            console.log('instantiateStreaming failed, this is fine')
+            console.log('compileStreaming failed, this is fine')
             window.close()
           })
         }
