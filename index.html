@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <button>Button just to check renderer responsiveness</button>
+    <script>
+      "use strict";
+      console.error('instantiateAsync')
+      const wasmBinaryFile = new URL('d3wasm.wasm', document.location.href).toString()
+      fetch(wasmBinaryFile, { credentials: "same-origin" }).then(
+        (response) => {
+          console.log('fetch finished')
+          WebAssembly.instantiateStreaming(response, {}).then(() => {
+            console.log('instantiateStreaming finished, this is fine')
+            window.close()
+          }).catch(() => {
+            console.log('instantiateStreaming failed, this is fine')
+            window.close()
+          })
+        }
+      );
+      console.log("waiting...");
+    </script>
+  </body>
+</html>
