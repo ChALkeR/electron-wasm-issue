@@ -1,8 +1,11 @@
-# This is a demo for an Electron issue.
+# This is a demo for a Chromium / Electron issue.
 
 ## Issue
 
 See https://github.com/electron/electron/issues/26903 for the full issue description.
+
+Opening devtools while a WASM file is being loaded into `compileStreaming` or `instantiateStreaming`
+hangs the process.
 
 ## To reproduce on Chromium
 
@@ -12,7 +15,15 @@ See https://github.com/electron/electron/issues/26903 for the full issue descrip
 
 3. Observe the hang. Try typing something into devtools.
 
-Putting CPU under pressure is not required in this testcase.
+Notes:
+
+* Closing devtools doesn't help.
+
+* Waiting until the response finishes loading doesn't help.
+
+* This issue doesn't happen without opening devtools while WASM is being loaded.
+
+Putting CPU under pressure is not required in this testcase (unlike the testcase below).
 
 ## To reproduce the original testcase in Electron:
 
