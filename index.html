@@ -2,27 +2,31 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-  </head>
-  <body>
-    <button>Button just to check renderer responsiveness</button>
-    <script>
+    <title>Chromium WASM + devtools hang</title>
+    <script defer>
       "use strict";
       console.log('fetch/compile started')
       const wasmBinaryFile = new URL('d3wasm.wasm', document.location.href).toString()
       fetch(wasmBinaryFile, { credentials: "same-origin" }).then(
         (response) => {
+          console.log('Remember to test this on a freshly opened tab with no prior devtools')
           console.log('fetch finished')
           // Can be also reproduced with instantiateStreaming
           WebAssembly.compileStreaming(response, {}).then(() => {
             console.log('compileStreaming finished, this is fine')
-            window.close()
           }).catch(() => {
             console.log('compileStreaming failed, this is fine')
-            window.close()
+          }).then(() => {
+            document.querySelector('#status').innerText = 'Finished'
           })
         }
       );
       console.log("waiting...");
     </script>
+  </head>
+  <body>
+    <p id="status">Waiting...<br>Open devtools now</p>
+    <p><label>Input just to test renderer responsiveness: <input type="text"></input></label></p>
+    <p><button>Button just to test renderer responsiveness</button></p>
   </body>
 </html>
