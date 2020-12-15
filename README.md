@@ -38,4 +38,4 @@ Putting CPU under pressure is not required in this testcase (unlike the testcase
 
 `d3wasm.wasm` taken from [d3wasm](https://github.com/gabrielcuvillier/d3wasm) project
 ([direct link](https://wasm.continuation-labs.com/d3demo/d3wasm.wasm)) and is licenensed under
-GPU GPL v3.0.
+GNU GPL v3.0.
